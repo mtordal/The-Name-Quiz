@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">The Name Quiz</string>
+    <string name="database">Database</string>
+    <string name="quiz">Quiz</string>
+    <string name="add">Add new student</string>
+    <string name="the_name_quiz_app">The Name Quiz App</string>
+    <string name="bendik">Bendik</string>
+    <string name="jon">Jon</string>
+    <string name="thomas">Thomas</string>
+    <string name="name">Name</string>
+    <string name="take_a_picture">Take photo</string>
+    <string name="existing_image">Choose existing</string>
+</resources>
