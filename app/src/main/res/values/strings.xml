@@ -10,4 +10,6 @@
     <string name="name">Name</string>
     <string name="take_a_picture">Take photo</string>
     <string name="existing_image">Choose existing</string>
+    <string name="question">What is the name of this student?</string>
+    <string name="submit">Submit</string>
 </resources>

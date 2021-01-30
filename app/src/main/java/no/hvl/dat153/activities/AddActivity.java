@@ -12,6 +12,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,6 +25,8 @@ import no.hvl.dat153.classes.Database;
 import no.hvl.dat153.classes.Person;
 
 public class AddActivity extends AppCompatActivity {
+    TextView name;
+    ImageView image;
 
     static final int REQUEST_CAMERA_CODE = 101;
     static final int CAMERA_REQUEST_CODE = 102;
@@ -35,6 +38,8 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
+        name = findViewById(R.id.nameTextView);
+        image = findViewById(R.id.imageView);
         Button takePhoto = findViewById(R.id.button5);
         takePhoto.setOnClickListener(v -> askCameraPermission());
         Button chooseExisting = findViewById(R.id.button6);
@@ -42,6 +47,8 @@ public class AddActivity extends AppCompatActivity {
     }
 
     public void askCameraPermission() {
+        name.onEditorAction(EditorInfo.IME_ACTION_DONE);
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, REQUEST_CAMERA_CODE);
         } else {
@@ -55,6 +62,8 @@ public class AddActivity extends AppCompatActivity {
     }
 
     public void askGalleryPermission() {
+        name.onEditorAction(EditorInfo.IME_ACTION_DONE);
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_GALLERY_CODE);
         } else {
@@ -69,8 +78,6 @@ public class AddActivity extends AppCompatActivity {
     }
 
     public void addNewStudent(View view) {
-        TextView name = findViewById(R.id.nameTextView);
-        ImageView image = findViewById(R.id.imageView);
         if (!name.toString().equals("") && image.getDrawable() != null) {
             ((Database) this.getApplication()).addStudent(new Person(image.getDrawable(), name.getText().toString()));
             Toast.makeText(this, "New student added", Toast.LENGTH_SHORT).show();
@@ -103,13 +110,11 @@ public class AddActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == CAMERA_REQUEST_CODE) {
-            ImageView image = findViewById(R.id.imageView);
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             image.setImageBitmap(bitmap);
         }
 
         if (requestCode == GALLERY_REQUEST_CODE) {
-            ImageView image = findViewById(R.id.imageView);
             image.setImageURI(data.getData());
         }
     }

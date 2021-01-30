@@ -24,7 +24,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/name"
+        android:text=""
+        android:hint="@string/name"
         android:textAlignment="textStart" />
 
     <ImageView
@@ -35,7 +36,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:orientation="horizontal">
 
         <Button

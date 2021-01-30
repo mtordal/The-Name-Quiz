@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.ArrayList;
+
 import no.hvl.dat153.R;
 import no.hvl.dat153.classes.Database;
 import no.hvl.dat153.classes.Person;
@@ -17,9 +19,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ((Database) this.getApplication()).addStudent(new Person(getDrawable(R.drawable.bendik), "Bendik"));
-        ((Database) this.getApplication()).addStudent(new Person(getDrawable(R.drawable.jon), "Jon"));
-        ((Database) this.getApplication()).addStudent(new Person(getDrawable(R.drawable.thomas), "Thomas"));
+        ArrayList<Person> database = ((Database) this.getApplication()).getDatabase();
+
+        if (database.isEmpty()) {
+            ((Database) this.getApplication()).addStudent(new Person(getDrawable(R.drawable.bendik), "Bendik"));
+            ((Database) this.getApplication()).addStudent(new Person(getDrawable(R.drawable.jon), "Jon"));
+            ((Database) this.getApplication()).addStudent(new Person(getDrawable(R.drawable.thomas), "Thomas"));
+        }
     }
 
     public void showDatabase(View view) {
