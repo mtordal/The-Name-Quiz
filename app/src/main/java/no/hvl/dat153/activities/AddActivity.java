@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,9 +26,10 @@ import no.hvl.dat153.classes.Database;
 import no.hvl.dat153.classes.Person;
 
 public class AddActivity extends AppCompatActivity {
-    TextView name;
+    EditText name;
     ImageView image;
 
+    // Request codes
     static final int REQUEST_CAMERA_CODE = 101;
     static final int CAMERA_REQUEST_CODE = 102;
     static final int REQUEST_GALLERY_CODE = 103;
@@ -38,16 +40,17 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
+        // Get views
         name = findViewById(R.id.nameTextView);
         image = findViewById(R.id.imageView);
         Button takePhoto = findViewById(R.id.button5);
-        takePhoto.setOnClickListener(v -> askCameraPermission());
+        takePhoto.setOnClickListener(v -> askCameraPermission()); // Listener on click camera
         Button chooseExisting = findViewById(R.id.button6);
-        chooseExisting.setOnClickListener(v -> askGalleryPermission());
+        chooseExisting.setOnClickListener(v -> askGalleryPermission()); // Listener on click existing image
     }
 
-    public void askCameraPermission() {
-        name.onEditorAction(EditorInfo.IME_ACTION_DONE);
+    public void askCameraPermission() { // Ask for camera permission
+        name.onEditorAction(EditorInfo.IME_ACTION_DONE); // Hide keyboard
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, REQUEST_CAMERA_CODE);
@@ -56,13 +59,13 @@ public class AddActivity extends AppCompatActivity {
         }
     }
 
-    public void openCamera() {
+    public void openCamera() { // Open camera
         Intent camera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(camera, CAMERA_REQUEST_CODE);
     }
 
-    public void askGalleryPermission() {
-        name.onEditorAction(EditorInfo.IME_ACTION_DONE);
+    public void askGalleryPermission() { // Ask for gallery permission
+        name.onEditorAction(EditorInfo.IME_ACTION_DONE); // Hide keyboard
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_GALLERY_CODE);
@@ -71,13 +74,13 @@ public class AddActivity extends AppCompatActivity {
         }
     }
 
-    public void openGallery() {
+    public void openGallery() { // Open gallery
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         startActivityForResult(intent, GALLERY_REQUEST_CODE);
     }
 
-    public void addNewStudent(View view) {
+    public void addNewStudent(View view) { // Add new student to the database
         if (!name.toString().equals("") && image.getDrawable() != null) {
             ((Database) this.getApplication()).addStudent(new Person(image.getDrawable(), name.getText().toString()));
             Toast.makeText(this, "New student added", Toast.LENGTH_SHORT).show();
@@ -110,11 +113,13 @@ public class AddActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == CAMERA_REQUEST_CODE) {
+            // Set imageview to the newly captured image
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             image.setImageBitmap(bitmap);
         }
 
         if (requestCode == GALLERY_REQUEST_CODE) {
+            // Set imageview to the selected image
             image.setImageURI(data.getData());
         }
     }

@@ -34,29 +34,33 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        // Find views
         title = findViewById(R.id.title);
         image = findViewById(R.id.studentImage);
         name = findViewById(R.id.studentName);
         button = findViewById(R.id.button8);
         scoreView = findViewById(R.id.score);
+
+        // Track score
         score = 0;
         total = 0;
 
-        button.setOnClickListener(v -> guessSubmitted());
+        button.setOnClickListener(v -> guessSubmitted()); // Listener on submit
 
+        // Randomize database
         ArrayList<Person> database = ((Database) this.getApplication()).getDatabase();
         Collections.shuffle(database);
         iter = database.iterator();
 
-        newStudent();
+        newStudent(); // Show student
     }
 
     public void newStudent() {
-        if (iter.hasNext()) {
+        if (iter.hasNext()) { // If there are more students in the list
             student = iter.next();
             image.setImageDrawable(student.getImage());
             name.setText("");
-        } else {
+        } else { // No more students
             title.setText("Final result");
             image.setImageDrawable(null);
             name.setText("");
@@ -71,19 +75,19 @@ public class QuizActivity extends AppCompatActivity {
         String guess = name.getText().toString();
         String answer = student.getName();
 
-        if (guess.toLowerCase().equals(answer.toLowerCase())) {
+        if (guess.toLowerCase().equals(answer.toLowerCase())) { // Correct guess
             score++;
             Toast.makeText(this, "Correct!", Toast.LENGTH_LONG).show();
-        } else {
+        } else { // Incorrect guess
             Toast.makeText(this, "Incorrect, correct answer was " + answer + ".", Toast.LENGTH_LONG).show();
         }
 
-        scoreView.setText(score + "/" + total);
-        name.onEditorAction(EditorInfo.IME_ACTION_DONE);
+        scoreView.setText(score + "/" + total); // Update score
+        name.onEditorAction(EditorInfo.IME_ACTION_DONE); // Hide keyboard
         newStudent();
     }
 
-    public void endQuiz() {
+    public void endQuiz() { // Start main activity
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }

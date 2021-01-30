@@ -21,6 +21,7 @@ public class DatabaseAdapter extends ArrayAdapter<Person> {
     private Context mContext;
     private int mResource;
 
+    // Constructor
     public DatabaseAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Person> objects) {
         super(context, resource, objects);
         this.mContext = context;
@@ -34,12 +35,15 @@ public class DatabaseAdapter extends ArrayAdapter<Person> {
 
         convertView = layoutInflater.inflate(mResource, parent, false);
 
+        // Set imageview to student image
         ImageView imageView = convertView.findViewById(R.id.image);
         imageView.setImageDrawable(getItem(position).getImage());
 
+        // Set textview to student name
         TextView textName = convertView.findViewById(R.id.name);
         textName.setText(getItem(position).getName());
 
+        // Listener on click delete button
         ImageButton deleteBtn = convertView.findViewById(R.id.deleteBtn);
         deleteBtn.setOnClickListener(v -> remove(getItem(position)));
         return convertView;

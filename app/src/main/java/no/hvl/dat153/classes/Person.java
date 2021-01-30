@@ -6,11 +6,13 @@ public class Person {
     Drawable image;
     String name;
 
+    // Constructor
     public Person(Drawable image, String name) {
         this.image = image;
         this.name = name;
     }
 
+    // Getters and setters
     public Drawable getImage() {
         return image;
     }

@@ -22,16 +22,16 @@ public class DatabaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
 
-        listView = findViewById(R.id.listView);
+        listView = findViewById(R.id.listView); // Get listview
 
-        ArrayList<Person> database = ((Database) this.getApplication()).getDatabase();
+        ArrayList<Person> database = ((Database) this.getApplication()).getDatabase(); // Get database
 
-        DatabaseAdapter databaseAdapter = new DatabaseAdapter(this, R.layout.database_view, database);
+        DatabaseAdapter databaseAdapter = new DatabaseAdapter(this, R.layout.database_view, database); // Create adapter on database view layout
 
-        listView.setAdapter(databaseAdapter);
+        listView.setAdapter(databaseAdapter); // Set adapter to the listview
     }
 
-    public void addNewStudent(View view) {
+    public void addNewStudent(View view) { // Start add activity
         Intent i = new Intent(this, AddActivity.class);
         startActivity(i);
     }

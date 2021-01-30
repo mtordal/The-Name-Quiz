@@ -19,26 +19,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ArrayList<Person> database = ((Database) this.getApplication()).getDatabase();
+        ArrayList<Person> database = ((Database) this.getApplication()).getDatabase(); // Get database
 
-        if (database.isEmpty()) {
+        if (database.isEmpty()) { // Create standard elements if database is empty
             ((Database) this.getApplication()).addStudent(new Person(getDrawable(R.drawable.bendik), "Bendik"));
             ((Database) this.getApplication()).addStudent(new Person(getDrawable(R.drawable.jon), "Jon"));
             ((Database) this.getApplication()).addStudent(new Person(getDrawable(R.drawable.thomas), "Thomas"));
         }
     }
 
-    public void showDatabase(View view) {
+    public void showDatabase(View view) { // Start database activity
         Intent i = new Intent(this, DatabaseActivity.class);
         startActivity(i);
     }
 
-    public void startQuiz(View view) {
+    public void startQuiz(View view) { // Start quiz activity
         Intent i = new Intent(this, QuizActivity.class);
         startActivity(i);
     }
 
-    public void addNewStudent(View view) {
+    public void addNewStudent(View view) { // Start add activity
         Intent i = new Intent(this, AddActivity.class);
         startActivity(i);
     }
