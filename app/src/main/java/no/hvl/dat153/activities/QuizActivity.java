@@ -59,15 +59,18 @@ public class QuizActivity extends AppCompatActivity {
         if (iter.hasNext()) { // If there are more students in the list
             student = iter.next();
             image.setImageDrawable(student.getImage());
-            name.setText("");
         } else { // No more students
             title.setText("Final result");
             image.setImageDrawable(null);
-            name.setText("");
+            name.setHint("");
+            name.setBackgroundResource(android.R.color.transparent);
+            name.clearFocus();
             button.setText("End quiz");
             button.setOnClickListener(v -> endQuiz());
-            name.onEditorAction(EditorInfo.IME_ACTION_DONE);
         }
+
+        name.setText("");
+        name.onEditorAction(EditorInfo.IME_ACTION_DONE);
     }
 
     public void guessSubmitted() {
