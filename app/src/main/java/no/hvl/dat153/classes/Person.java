@@ -2,9 +2,16 @@ package no.hvl.dat153.classes;
 
 import android.graphics.drawable.Drawable;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Person {
-    Drawable image;
-    String name;
+    @PrimaryKey(autoGenerate = true)
+    public int pId;
+
+    public Drawable image;
+    public String name;
 
     // Constructor
     public Person(Drawable image, String name) {
@@ -12,20 +19,12 @@ public class Person {
         this.name = name;
     }
 
-    // Getters and setters
+    // Getters
     public Drawable getImage() {
         return image;
     }
 
-    public void setImage(Drawable image) {
-        this.image = image;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

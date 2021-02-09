@@ -16,18 +16,17 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 import no.hvl.dat153.R;
-import no.hvl.dat153.classes.Database;
+import no.hvl.dat153.classes.PersonDatabase;
 import no.hvl.dat153.classes.Person;
 
 public class AddActivity extends AppCompatActivity {
     EditText name;
     ImageView image;
+
+    private PersonDatabase db;
 
     // Request codes
     static final int REQUEST_CAMERA_CODE = 101;
@@ -39,6 +38,9 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+
+        // Get database
+        db = PersonDatabase.getInstance(this);
 
         // Get views
         name = findViewById(R.id.nameTextView);
@@ -82,7 +84,7 @@ public class AddActivity extends AppCompatActivity {
 
     public void addNewStudent(View view) { // Add new student to the database
         if (!name.toString().equals("") && image.getDrawable() != null) {
-            ((Database) this.getApplication()).addStudent(new Person(image.getDrawable(), name.getText().toString()));
+            db.personDao().addStudent(new Person(image.getDrawable(), name.getText().toString()));
             Toast.makeText(this, "New student added", Toast.LENGTH_SHORT).show();
             Intent i = new Intent(this, DatabaseActivity.class);
             startActivity(i);

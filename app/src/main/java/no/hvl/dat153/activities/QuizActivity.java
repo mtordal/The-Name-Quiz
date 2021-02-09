@@ -10,13 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import no.hvl.dat153.R;
-import no.hvl.dat153.classes.Database;
 import no.hvl.dat153.classes.Person;
+import no.hvl.dat153.classes.PersonDatabase;
 
 public class QuizActivity extends AppCompatActivity {
     TextView title;
@@ -47,8 +48,11 @@ public class QuizActivity extends AppCompatActivity {
 
         button.setOnClickListener(v -> guessSubmitted()); // Listener on submit
 
+        // Get database
+        PersonDatabase db = PersonDatabase.getInstance(this);
+
         // Randomize database
-        ArrayList<Person> database = ((Database) this.getApplication()).getDatabase();
+        List<Person> database = db.personDao().getDb();
         Collections.shuffle(database);
         iter = database.iterator();
 
@@ -60,12 +64,12 @@ public class QuizActivity extends AppCompatActivity {
             student = iter.next();
             image.setImageDrawable(student.getImage());
         } else { // No more students
-            title.setText("Final result");
+            title.setText(R.string.resultTitle);
             image.setImageDrawable(null);
             name.setHint("");
             name.setBackgroundResource(android.R.color.transparent);
             name.clearFocus();
-            button.setText("End quiz");
+            button.setText(R.string.endBtn);
             button.setOnClickListener(v -> endQuiz());
         }
 
@@ -85,7 +89,7 @@ public class QuizActivity extends AppCompatActivity {
             Toast.makeText(this, "Incorrect, correct answer was " + answer + ".", Toast.LENGTH_LONG).show();
         }
 
-        scoreView.setText(score + "/" + total); // Update score
+        scoreView.setText(MessageFormat.format("{0}/{1}", score, total)); // Update score
         name.onEditorAction(EditorInfo.IME_ACTION_DONE); // Hide keyboard
         newStudent();
     }

@@ -8,24 +8,28 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import no.hvl.dat153.R;
 import no.hvl.dat153.classes.Person;
+import no.hvl.dat153.classes.PersonDatabase;
 
 public class DatabaseAdapter extends ArrayAdapter<Person> {
-    private Context mContext;
-    private int mResource;
+    private final Context mContext;
+    private final int mResource;
+    private final PersonDatabase db;
 
     // Constructor
-    public DatabaseAdapter(@NonNull Context context, int resource, @NonNull ArrayList<Person> objects) {
+    public DatabaseAdapter(@NonNull Context context, int resource, @NonNull List<Person> objects) {
         super(context, resource, objects);
         this.mContext = context;
         this.mResource = resource;
+        this.db = PersonDatabase.getInstance(context);
     }
 
     @NonNull
@@ -45,7 +49,14 @@ public class DatabaseAdapter extends ArrayAdapter<Person> {
 
         // Listener on click delete button
         ImageButton deleteBtn = convertView.findViewById(R.id.deleteBtn);
-        deleteBtn.setOnClickListener(v -> remove(getItem(position)));
+        deleteBtn.setOnClickListener(v -> removePerson(position));
         return convertView;
+    }
+
+    public void removePerson(int pos){
+        Person person = getItem(pos);
+        remove(person);
+        db.personDao().removeStudent(person);
+        Toast.makeText(mContext, "Successfully removed " + person.getName(), Toast.LENGTH_SHORT).show();
     }
 }
