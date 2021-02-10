@@ -1,5 +1,6 @@
 package no.hvl.dat153.activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -55,6 +56,11 @@ public class QuizActivity extends AppCompatActivity {
         List<Person> database = db.personDao().getDb();
         Collections.shuffle(database);
         iter = database.iterator();
+
+        if (database.isEmpty()) {
+            new AlertDialog.Builder(this).setMessage("The database is empty! Add some students before starting" +
+                    " the quiz.").show();
+        }
 
         newStudent(); // Show student
     }
