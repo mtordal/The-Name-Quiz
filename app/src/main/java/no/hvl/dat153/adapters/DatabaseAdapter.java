@@ -49,14 +49,12 @@ public class DatabaseAdapter extends ArrayAdapter<Person> {
 
         // Listener on click delete button
         ImageButton deleteBtn = convertView.findViewById(R.id.deleteBtn);
-        deleteBtn.setOnClickListener(v -> removePerson(position));
+        deleteBtn.setOnClickListener(v -> {
+            Person p = getItem(position);
+            remove(p);
+            db.personDao().removeStudent(p);
+            Toast.makeText(mContext, "Successfully removed " + p.getName(), Toast.LENGTH_SHORT).show();
+        });
         return convertView;
-    }
-
-    public void removePerson(int pos){
-        Person person = getItem(pos);
-        remove(person);
-        db.personDao().removeStudent(person);
-        Toast.makeText(mContext, "Successfully removed " + person.getName(), Toast.LENGTH_SHORT).show();
     }
 }

@@ -13,7 +13,7 @@ public interface PersonDao {
     List<Person> getDb();
 
     @Insert
-    void addStudent(Person students);
+    void addStudent(Person student);
 
     @Delete
     void removeStudent(Person student);
