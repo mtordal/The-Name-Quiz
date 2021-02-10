@@ -31,6 +31,8 @@ public class QuizActivity extends AppCompatActivity {
     private int score;
     private int total;
 
+    public static List<Person> database;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +55,7 @@ public class QuizActivity extends AppCompatActivity {
         PersonDatabase db = PersonDatabase.getInstance(this);
 
         // Randomize database
-        List<Person> database = db.personDao().getDb();
+        database = db.personDao().getDb();
         Collections.shuffle(database);
         iter = database.iterator();
 
