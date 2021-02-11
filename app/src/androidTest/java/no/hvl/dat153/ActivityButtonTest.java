@@ -25,6 +25,7 @@ public class ActivityButtonTest {
     public ActivityScenarioRule<MainActivity> activityRule =
             new ActivityScenarioRule<>(MainActivity.class);
 
+    // Test for launching databaseActivity after button click
     @Test
     public void databaseBtnStartsDatabaseActivity() {
         Intents.init();

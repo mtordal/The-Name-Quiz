@@ -26,6 +26,7 @@ public class ScoreUpdatedTest {
     public ActivityScenarioRule<QuizActivity> activityRule =
             new ActivityScenarioRule<>(QuizActivity.class);
 
+    // Test score after submitting correct answer
     @Test
     public void scoreIsCorrect() {
         // Only works if database is not empty
@@ -39,6 +40,7 @@ public class ScoreUpdatedTest {
         }
     }
 
+    // Test score after submitting wrong answer
     @Test
     public void scoreIsNotCorrect() {
         // Only works if database is not empty

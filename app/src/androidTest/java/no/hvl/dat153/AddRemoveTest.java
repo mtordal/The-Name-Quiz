@@ -25,6 +25,7 @@ public class AddRemoveTest {
     private PersonDatabase db;
     private Context mContext;
 
+    // Create in memory datbase
     @Before
     public void createDb() {
         mContext = ApplicationProvider.getApplicationContext();
@@ -32,11 +33,13 @@ public class AddRemoveTest {
         dao = db.personDao();
     }
 
+    // Close in memory database
     @After
     public void closeDb() {
         db.close();
     }
 
+    // Test for adding a student to database
     @Test
     public void testAddStudent() {
         assertThat(dao.getDb().size(), equalTo(0));
@@ -45,6 +48,7 @@ public class AddRemoveTest {
         assertThat(dao.getDb().size(), equalTo(1));
     }
 
+    // Test for adding and then removing from databse
     @Test
     public void testRemoveStudent() {
         assertThat(dao.getDb().size(), equalTo(0));
