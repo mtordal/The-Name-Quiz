@@ -28,21 +28,25 @@ public class ScoreUpdatedTest {
 
     @Test
     public void scoreIsCorrect() {
-        String name = QuizActivity.database.get(0).getName();
+        // Only works if database is not empty
+        if (!QuizActivity.database.isEmpty()) {
+            String name = QuizActivity.database.get(0).getName();
 
-        onView(withId(R.id.score)).check(matches(withSubstring("0/0")));
-        onView(withId(R.id.studentName)).perform(typeText(name), closeSoftKeyboard());
-        onView(withId(R.id.button8)).perform(click());
-        onView(withId(R.id.score)).check(matches(withSubstring("1/1")));
-
+            onView(withId(R.id.score)).check(matches(withSubstring("0/0")));
+            onView(withId(R.id.studentName)).perform(typeText(name), closeSoftKeyboard());
+            onView(withId(R.id.button8)).perform(click());
+            onView(withId(R.id.score)).check(matches(withSubstring("1/1")));
+        }
     }
 
     @Test
     public void scoreIsNotCorrect() {
-        onView(withId(R.id.score)).check(matches(withSubstring("0/0")));
-        onView(withId(R.id.studentName)).perform(typeText("Wrong"), closeSoftKeyboard());
-        onView(withId(R.id.button8)).perform(click());
-        onView(withId(R.id.score)).check(matches(withSubstring("0/1")));
-
+        // Only works if database is not empty
+        if (!QuizActivity.database.isEmpty()) {
+            onView(withId(R.id.score)).check(matches(withSubstring("0/0")));
+            onView(withId(R.id.studentName)).perform(typeText("Wrong"), closeSoftKeyboard());
+            onView(withId(R.id.button8)).perform(click());
+            onView(withId(R.id.score)).check(matches(withSubstring("0/1")));
+        }
     }
 }

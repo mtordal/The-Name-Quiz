@@ -20,7 +20,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(AndroidJUnit4.class)
-public class AddStudentTest {
+public class AddRemoveTest {
     private PersonDao dao;
     private PersonDatabase db;
     private Context mContext;
@@ -43,5 +43,17 @@ public class AddStudentTest {
 
         dao.addStudent(new Person(ContextCompat.getDrawable(mContext, R.drawable.jon), "Jon"));
         assertThat(dao.getDb().size(), equalTo(1));
+    }
+
+    @Test
+    public void testRemoveStudent() {
+        assertThat(dao.getDb().size(), equalTo(0));
+
+        Person p = new Person(ContextCompat.getDrawable(mContext, R.drawable.jon), "Jon");
+        dao.addStudent(p);
+        assertThat(dao.getDb().size(), equalTo(1));
+
+        dao.removeStudent(p);
+        assertThat(dao.getDb().size(), equalTo(0));
     }
 }
