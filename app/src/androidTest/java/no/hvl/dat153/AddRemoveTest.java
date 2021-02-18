@@ -1,63 +1,51 @@
 package no.hvl.dat153;
 
-import android.content.Context;
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 
-import androidx.core.content.ContextCompat;
-import androidx.room.Room;
-import androidx.test.core.app.ApplicationProvider;
+import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.filters.LargeTest;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import no.hvl.dat153.classes.Person;
-import no.hvl.dat153.classes.PersonDao;
-import no.hvl.dat153.classes.PersonDatabase;
+import no.hvl.dat153.activities.AddActivity;
 
-import static androidx.test.espresso.matcher.ViewMatchers.assertThat;
-import static org.hamcrest.Matchers.equalTo;
+import static android.app.Instrumentation.ActivityResult;
+import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.intent.Intents.intending;
+import static androidx.test.espresso.intent.matcher.IntentMatchers.hasAction;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
+@LargeTest
 public class AddRemoveTest {
-    private PersonDao dao;
-    private PersonDatabase db;
-    private Context mContext;
 
-    // Create in memory datbase
-    @Before
-    public void createDb() {
-        mContext = ApplicationProvider.getApplicationContext();
-        db = Room.inMemoryDatabaseBuilder(mContext, PersonDatabase.class).build();
-        dao = db.personDao();
-    }
+    @Rule
+    public IntentsTestRule<AddActivity> activityRule =
+            new IntentsTestRule<>(AddActivity.class);
 
-    // Close in memory database
-    @After
-    public void closeDb() {
-        db.close();
-    }
-
-    // Test for adding a student to database
+    // Test for adding student
     @Test
-    public void testAddStudent() {
-        assertThat(dao.getDb().size(), equalTo(0));
+    public void addStudent() {
+        int sizeBefore = activityRule.getActivity().students;
 
-        dao.addStudent(new Person(ContextCompat.getDrawable(mContext, R.drawable.jon), "Jon"));
-        assertThat(dao.getDb().size(), equalTo(1));
-    }
-
-    // Test for adding and then removing from databse
-    @Test
-    public void testRemoveStudent() {
-        assertThat(dao.getDb().size(), equalTo(0));
-
-        Person p = new Person(ContextCompat.getDrawable(mContext, R.drawable.jon), "Jon");
-        dao.addStudent(p);
-        assertThat(dao.getDb().size(), equalTo(1));
-
-        dao.removeStudent(p);
-        assertThat(dao.getDb().size(), equalTo(0));
+        Intent intent = new Intent();
+        Uri uri = Uri.parse("android.resource://no.hvl.dat153/drawable/" + R.drawable.bendik);
+        intent.setData(uri);
+        onView(withId(R.id.nameTextView)).perform(typeText("Bendik"),
+                closeSoftKeyboard());
+        ActivityResult result = new ActivityResult(Activity.RESULT_OK, intent);
+        intending(hasAction(Intent.ACTION_PICK)).respondWith(result);
+        onView(withId(R.id.button6)).perform(click());
+        onView(withId(R.id.button7)).perform(click());
+        assertEquals(activityRule.getActivity().students, sizeBefore + 1);
     }
 }

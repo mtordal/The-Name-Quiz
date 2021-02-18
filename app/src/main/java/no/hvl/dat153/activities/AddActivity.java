@@ -28,6 +28,8 @@ public class AddActivity extends AppCompatActivity {
 
     private PersonDatabase db;
 
+    public int students;
+
     // Request codes
     static final int REQUEST_CAMERA_CODE = 101;
     static final int CAMERA_REQUEST_CODE = 102;
@@ -41,6 +43,7 @@ public class AddActivity extends AppCompatActivity {
 
         // Get database
         db = PersonDatabase.getInstance(this);
+        students = db.personDao().getDb().size();
 
         // Get views
         name = findViewById(R.id.nameTextView);
@@ -85,6 +88,7 @@ public class AddActivity extends AppCompatActivity {
     public void addNewStudent(View view) { // Add new student to the database
         if (!name.toString().equals("") && image.getDrawable() != null) {
             db.personDao().addStudent(new Person(image.getDrawable(), name.getText().toString()));
+            students += 1;
             Toast.makeText(this, "New student added", Toast.LENGTH_SHORT).show();
             Intent i = new Intent(this, DatabaseActivity.class);
             startActivity(i);
