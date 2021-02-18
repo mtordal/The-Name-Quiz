@@ -13,9 +13,12 @@ public abstract class PersonDatabase extends RoomDatabase {
     private static PersonDatabase instance;
 
     public static PersonDatabase getInstance(Context context) {
-        if(instance == null){
+        if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(), PersonDatabase.class, "personDb")
-                    .fallbackToDestructiveMigration().allowMainThreadQueries().build();
+                    .fallbackToDestructiveMigration()
+                    // TODO: try not do do that
+                    .allowMainThreadQueries()
+                    .build();
         }
         return instance;
     }

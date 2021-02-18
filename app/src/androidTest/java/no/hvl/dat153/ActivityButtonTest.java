@@ -14,9 +14,11 @@ import no.hvl.dat153.activities.DatabaseActivity;
 import no.hvl.dat153.activities.MainActivity;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.intent.Intents.intended;
+import static androidx.test.espresso.matcher.ViewMatchers.withSubstring;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -28,8 +30,7 @@ public class ActivityButtonTest {
     // Test for launching databaseActivity after button click
     @Test
     public void databaseBtnStartsDatabaseActivity() {
-        Intents.init();
         onView(withId(R.id.button)).perform(ViewActions.click());
-        intended(hasComponent(DatabaseActivity.class.getName()));
+        onView(withId(R.id.button4)).check(matches(withSubstring("Add new student")));
     }
 }

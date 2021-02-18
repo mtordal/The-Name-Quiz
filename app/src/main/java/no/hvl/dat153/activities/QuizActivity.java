@@ -31,7 +31,7 @@ public class QuizActivity extends AppCompatActivity {
     private int score;
     private int total;
 
-    public static List<Person> database;
+    public static List<Person> randomOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +55,10 @@ public class QuizActivity extends AppCompatActivity {
         PersonDatabase db = PersonDatabase.getInstance(this);
 
         // Randomize database
-        database = db.personDao().getDb();
-        Collections.shuffle(database);
-        iter = database.iterator();
+        List<Person> database = db.personDao().getDb();
+        randomOrder = database;
+        Collections.shuffle(randomOrder);
+        iter = randomOrder.iterator();
 
         if (database.isEmpty()) {
             new AlertDialog.Builder(this).setMessage("The database is empty! Add some students before starting" +

@@ -30,8 +30,8 @@ public class ScoreUpdatedTest {
     @Test
     public void scoreIsCorrect() {
         // Only works if database is not empty
-        if (!QuizActivity.database.isEmpty()) {
-            String name = QuizActivity.database.get(0).getName();
+        if (!QuizActivity.randomOrder.isEmpty()) {
+            String name = QuizActivity.randomOrder.get(0).getName();
 
             onView(withId(R.id.score)).check(matches(withSubstring("0/0")));
             onView(withId(R.id.studentName)).perform(typeText(name), closeSoftKeyboard());
@@ -44,7 +44,7 @@ public class ScoreUpdatedTest {
     @Test
     public void scoreIsNotCorrect() {
         // Only works if database is not empty
-        if (!QuizActivity.database.isEmpty()) {
+        if (!QuizActivity.randomOrder.isEmpty()) {
             onView(withId(R.id.score)).check(matches(withSubstring("0/0")));
             onView(withId(R.id.studentName)).perform(typeText("Wrong"), closeSoftKeyboard());
             onView(withId(R.id.button8)).perform(click());
