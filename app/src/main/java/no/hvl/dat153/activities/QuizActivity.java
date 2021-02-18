@@ -20,7 +20,7 @@ import no.hvl.dat153.R;
 import no.hvl.dat153.classes.Person;
 import no.hvl.dat153.classes.PersonDatabase;
 
-public class QuizActivity extends AppCompatActivity {
+public class QuizActivity extends MenuActivity {
     TextView title;
     ImageView image;
     TextView name;

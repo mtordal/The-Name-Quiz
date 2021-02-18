@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/menu_home"
+        android:title="Home"
+        app:showAsAction="ifRoom"/>
+    <item android:id="@+id/menu_quiz"
+        android:title="Quiz"
+        app:showAsAction="never"/>
+    <item android:id="@+id/menu_database"
+        android:title="Database"
+        app:showAsAction="never"/>
+    <item android:id="@+id/menu_add"
+        android:title="Add participant"
+        app:showAsAction="never"/>
+</menu>

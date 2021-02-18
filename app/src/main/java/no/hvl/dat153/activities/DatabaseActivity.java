@@ -14,7 +14,7 @@ import no.hvl.dat153.adapters.DatabaseAdapter;
 import no.hvl.dat153.classes.PersonDatabase;
 import no.hvl.dat153.classes.Person;
 
-public class DatabaseActivity extends AppCompatActivity {
+public class DatabaseActivity extends MenuActivity {
     ListView listView;
 
     @Override

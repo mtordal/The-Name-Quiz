@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = {Person.class}, version = 2)
+@Database(entities = {Person.class}, version = 3)
 @TypeConverters({Converter.class})
 public abstract class PersonDatabase extends RoomDatabase {
     private static PersonDatabase instance;

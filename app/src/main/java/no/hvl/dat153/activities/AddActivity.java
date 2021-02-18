@@ -22,7 +22,7 @@ import no.hvl.dat153.R;
 import no.hvl.dat153.classes.PersonDatabase;
 import no.hvl.dat153.classes.Person;
 
-public class AddActivity extends AppCompatActivity {
+public class AddActivity extends MenuActivity {
     EditText name;
     ImageView image;
 
