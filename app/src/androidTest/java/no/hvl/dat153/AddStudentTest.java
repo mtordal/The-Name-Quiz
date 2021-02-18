@@ -26,7 +26,7 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class AddRemoveTest {
+public class AddStudentTest {
 
     @Rule
     public IntentsTestRule<AddActivity> activityRule =

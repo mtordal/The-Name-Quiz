@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/menu_home"
-        android:title="Home"
+        android:title="@string/home"
         app:showAsAction="ifRoom"/>
     <item android:id="@+id/menu_quiz"
-        android:title="Quiz"
+        android:title="@string/quiz"
         app:showAsAction="never"/>
     <item android:id="@+id/menu_database"
-        android:title="Database"
+        android:title="@string/database"
         app:showAsAction="never"/>
     <item android:id="@+id/menu_add"
-        android:title="Add participant"
+        android:title="@string/add"
         app:showAsAction="never"/>
 </menu>
