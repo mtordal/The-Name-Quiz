@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,23 +22,25 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Intent i;
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_home:
-                i = new Intent(this, MainActivity.class);
-                startActivity(i);
+                finish();
                 return true;
 
             case R.id.menu_quiz:
+                finish();
                 i = new Intent(this, QuizActivity.class);
                 startActivity(i);
                 return true;
 
             case R.id.menu_database:
+                finish();
                 i = new Intent(this, DatabaseActivity.class);
                 startActivity(i);
                 return true;
 
             case R.id.menu_add:
+                finish();
                 i = new Intent(this, AddActivity.class);
                 startActivity(i);
                 return true;

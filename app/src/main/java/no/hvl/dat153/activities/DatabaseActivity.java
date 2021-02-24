@@ -1,7 +1,5 @@
 package no.hvl.dat153.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +32,7 @@ public class DatabaseActivity extends MenuActivity {
     }
 
     public void addNewStudent(View view) { // Start add activity
+        finish();
         Intent i = new Intent(this, AddActivity.class);
         startActivity(i);
     }

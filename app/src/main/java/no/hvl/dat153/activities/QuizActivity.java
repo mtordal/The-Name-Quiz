@@ -1,9 +1,7 @@
 package no.hvl.dat153.activities;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -27,11 +25,10 @@ public class QuizActivity extends MenuActivity {
     Button button;
     TextView scoreView;
     private Iterator<Person> iter;
+    public List<Person> shuffledDb;
     private Person student;
     private int score;
     private int total;
-
-    public static List<Person> randomOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,9 +53,9 @@ public class QuizActivity extends MenuActivity {
 
         // Randomize database
         List<Person> database = db.personDao().getDb();
-        randomOrder = database;
-        Collections.shuffle(randomOrder);
-        iter = randomOrder.iterator();
+        shuffledDb = database;
+        Collections.shuffle(shuffledDb);
+        iter = shuffledDb.iterator();
 
         if (database.isEmpty()) {
             new AlertDialog.Builder(this).setMessage("The database is empty! Add some students before starting" +
@@ -104,7 +101,6 @@ public class QuizActivity extends MenuActivity {
     }
 
     public void endQuiz() { // Start main activity
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
+        finish();
     }
 }

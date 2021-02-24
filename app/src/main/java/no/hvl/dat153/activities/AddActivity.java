@@ -1,7 +1,6 @@
 package no.hvl.dat153.activities;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -90,6 +89,7 @@ public class AddActivity extends MenuActivity {
             db.personDao().addStudent(new Person(image.getDrawable(), name.getText().toString()));
             students += 1;
             Toast.makeText(this, "New student added", Toast.LENGTH_SHORT).show();
+            finish();
             Intent i = new Intent(this, DatabaseActivity.class);
             startActivity(i);
         }
