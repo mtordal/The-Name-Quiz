@@ -57,7 +57,7 @@ public class AddActivity extends MenuActivity {
         name.onEditorAction(EditorInfo.IME_ACTION_DONE); // Hide keyboard
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, REQUEST_CAMERA_CODE);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_CODE);
         } else {
             openCamera();
         }
@@ -72,7 +72,7 @@ public class AddActivity extends MenuActivity {
         name.onEditorAction(EditorInfo.IME_ACTION_DONE); // Hide keyboard
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_GALLERY_CODE);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_GALLERY_CODE);
         } else {
             openGallery();
         }

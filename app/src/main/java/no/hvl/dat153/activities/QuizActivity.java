@@ -75,6 +75,7 @@ public class QuizActivity extends MenuActivity {
             name.setHint("");
             name.setBackgroundResource(android.R.color.transparent);
             name.clearFocus();
+            name.onEditorAction(EditorInfo.IME_ACTION_DONE); // Hide keyboard
             button.setText(R.string.endBtn);
             button.setOnClickListener(v -> endQuiz());
         }
